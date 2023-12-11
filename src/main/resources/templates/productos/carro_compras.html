@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{menu.html}">
+
+<head>
+
+<meta charset="utf-8">
+
+<title>ECommerce</title>
+
+</head>
+
+
+<body>
+
+	<div layout:fragment="content">
+		<div class="container">
+			<!-- Page Heading/Breadcrumbs -->
+			<h1 class="mt-4 mb-3">
+				eCommerce <small>Carro de compras</small>
+			</h1>
+
+
+			<!-- Blog Post -->
+			<div class="card mb-4">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-9">
+							<table class="table">
+								<thead>
+								<tr>
+									<th scope="col">Producto</th>
+									<th scope="col">Nombre</th>
+									<th scope="col">Precio</th>
+									<th scope="col">Cantidad</th>
+									<th scope="col">Total</th>
+									<th scope="col">Acción</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr th:each = "detOrden:${cart}">
+									<td style="width:150px;">
+										<a th:href="@{/assets/{filename}(filename=*{detOrden.rutaImagen})}" data-fancybox>
+											<img th:src="@{/assets/{filename}(filename=*{detOrden.rutaImagen})}" alt="" class="img-thumbnail w-100">
+										</a>
+									</td>
+									<td th:text="${detOrden.nombre}"></td>
+									<td th:text="${detOrden.precio}"></td>
+									<td th:text="${detOrden.cantidad}"></td>
+									<td th:text="${detOrden.total}"></td>
+									<td><button class="btn-danger">Quitar</button></td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="col-lg-3">
+							<h2 class="card-title">SUBTOTAL</h2>
+
+							<ul class="list-group">
+								<li class="list-group-item"><h5 th:text="${orden.total}"></h5></li>
+								<a th:href="@{/order}" class="btn btn-dark">Ver Orden</a>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{menu.html}">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/estilos.css">
+    <title>Title</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <h2>Bienvenido a INDEX de TOTAL PRODUCTOS</h2>
+
+    <div class="contenedor-items">
+    <div class="row">
+        <div class="col col-xl-3 col-lg-4 col-md-6 col-sm-12 my-5 d-flex justify-content-around"
+             th:each="producto:${productos}" th:object="${producto}">
+            <form th:action="@{/cart}" method="POST">
+            <input type="hidden" th:value="${producto.id}" name="id">
+            <div class="item">
+            <div class="card" style="width: 18rem;">
+                <img th:src="@{/assets/{filename}(filename=*{rutaImagen})}" alt="" class="img-item img-thumbnail w-100 h-80">
+                <ul class="list-group list-group-flush">
+                    <li class="titulo-item list-group-item justify-content-center" th:text="*{'nombre: ' + nombre}"></li>
+                    <li class="list-group-item" th:text="*{'stock: ' + stock}"></li>
+                    <li class="precio-item list-group-item" th:text="*{'precio: ' + precio}"></li>
+                    <li>
+                        <input class="list-group-item" type="number" id="cantidad" name="cantidad"
+                               autocomplete="off" min="1" th:max="*{stock}" value="0">
+                    </li>
+                </ul>
+                <div class="card-body text-center">
+                    <button type="submit" class="boton-item btn-primary">Agregar</button>
+                    <!--<button type="submit" class="boton-item btn-primary">Agregar</button>-->
+
+                </div>
+            </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="row mt-5" th:with="page=${productos}">
+        <div class="col-sm-6">
+            <div th:sd:pagination-sumary></div>
+            <div class="col-sm-6">
+                <nav>
+                    <ul class="pagination" th:sd:pagination="full"></ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Carrito de Compras -->
+    <!--
+    <div class="carrito" id="carrito">
+        <div class="header-carrito">
+            <h2>Tu Carrito</h2>
+        </div>
+
+        <div class="carrito-items">
+
+        </div>
+
+        <div class="carrito-total">
+            <div class="fila">
+                <strong>Tu Total</strong>
+                <span class="carrito-precio-total">
+                        $120.000,00
+                    </span>
+            </div>
+            <button class="btn-pagar">Pagar <i class="fa-solid fa-bag-shopping"></i> </button>
+        </div>
+    </div>
+    -->
+
+</div>
+
+<!--
+<div layout:fragment="prueba">
+    <script src="/carrito.js" type="text/javascript" async></script>
+</div>
+-->
+
+</body>
+</html>

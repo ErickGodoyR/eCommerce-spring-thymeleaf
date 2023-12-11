@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{menu.html}" xmlns:sd="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <h2>Bienvenido a INDEX de ADMIN</h2>
+
+    <div class="text-end">
+        <a href="/admin/productos/nuevo" class="btn btn-primary mb-3">
+            Agregar producto
+        </a>
+    </div>
+
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th></th>
+            <th scope="col">Stock</th>
+            <th scope="col">Precio</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="producto:${productos}" th:object="${producto}">
+            <th th:text="*{id}"></th>
+            <td th:text="*{nombre}"></td>
+            <td style="width:150px;">
+                <a th:href="@{/assets/{filename}(filename=*{rutaImagen})}" data-fancybox>
+                    <img th:src="@{/assets/{filename}(filename=*{rutaImagen})}" alt="" class="img-thumbnail w-100">
+                </a>
+            </td>
+            <td th:text="*{stock}"></td>
+            <td th:text="*{precio}"></td>
+            <td>
+                <a class="btn btn-info" th:href="@{/admin/productos/{id}/editar(id=*{id})}">Editar</a>
+            </td>
+            <td>
+                <a class="text-danger ms-3" href="javascript:void(0)" th:onclick="'eliminarProducto(' + *{id} + ')'">Eliminar</a>
+                <form th:id="'eliminarProductoForm' + *{id}" th:action="@{/admin/productos/{id}/eliminar(id=*{id})}"
+                      method="post" class="d-none">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div class="row mt-5" th:with="page=${productos}">
+        <div class="col-sm-6">
+            <div th:sd:pagination-sumary></div>
+            <div class="col-sm-6">
+                <nav>
+                    <ul class="pagination" th:sd:pagination="full"></ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<div layout:fragment="scripts">
+    <script>
+        function eliminarProducto(id){
+            if(!confirm(`¿Estás seguro de eliminar producto?`)){
+            return;
+            }
+            $('#eliminarProductoForm' + id).submit();
+        }
+    </script>
+</div>
+
+</body>
+</html>

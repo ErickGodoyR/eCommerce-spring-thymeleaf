@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div layout:fragment="form">
+
+  <form action="" method="post" th:object="${producto}" enctype="multipart/form-data">
+    <div class="row g-3 align-items-center">
+      <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+        <label class="form-label" for="nombre">Nombre:</label>
+        <input type="text" id="nombre" placeholder="ingresa nombre"
+               class="form-control" th:field="*{nombre}">
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}"
+             th:errors="*{nombre}"></div>
+      </div>
+
+      <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+        <label class="form-label" for="precio">Precio:</label>
+        <input type="text" id="precio" placeholder="ingresa precio"
+               class="form-control" th:field="*{precio}">
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('precio')}"
+             th:errors="*{precio}"></div>
+      </div>
+    </div>
+
+
+    <div class="row g-3 align-items-center">
+      <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+        <label class="form-label" for="stock">Stock:</label>
+        <input type="text" id="stock" placeholder="ingresa stock"
+               class="form-control" th:field="*{stock}">
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('stock')}"
+             th:errors="*{stock}"></div>
+      </div>
+
+      <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+        <label class="form-label" for="portada">Imagen producto:</label>
+        <input type="file" id="portada" name="portada"
+               class="form-control" th:field="*{portada}">
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('portada')}"
+             th:errors="*{portada}"></div>
+      </div>
+    </div>
+
+    <div class="row g-3 align-items-center">
+      <div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+        <label class="form-label" for="categorias">Categoria:</label>
+        <select id="categorias" class="form-control" th:field="*{categoria}">
+          <option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.nombre}"></option>
+        </select>
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('categoria')}"
+             th:errors="*{categoria}"></div>
+        <!--<input type="text" placeholder="ingresa categoria"
+               class="form-control" >-->
+      </div>
+    </div>
+
+    <div class="text-end">
+      <button type="submit" class="btn btn-primary">Agregar</button>
+    </div>
+  </form>
+
+</div>
+
+
+<script
+        src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+<script
+        src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+</body>
+</html>
