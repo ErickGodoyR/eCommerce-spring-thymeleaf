@@ -7,7 +7,7 @@
 
 <meta charset="utf-8">
 
-<title>ECommerce</title>
+<title>Tienda</title>
 
 </head>
 
@@ -42,14 +42,16 @@
 								<tr th:each = "detOrden:${cart}">
 									<td style="width:150px;">
 										<a th:href="@{/assets/{filename}(filename=*{detOrden.rutaImagen})}" data-fancybox>
-											<img th:src="@{/assets/{filename}(filename=*{detOrden.rutaImagen})}" alt="" class="img-thumbnail w-100">
+											<img th:src="@{/assets/{filename}(filename=*{detOrden.rutaImagen})}" alt=""
+												 class="img-thumbnail w-100">
 										</a>
 									</td>
 									<td th:text="${detOrden.nombre}"></td>
 									<td th:text="${detOrden.precio}"></td>
 									<td th:text="${detOrden.cantidad}"></td>
 									<td th:text="${detOrden.total}"></td>
-									<td><button class="btn-danger">Quitar</button></td>
+									<td><a th:href="@{/delete/cart/{id} (id=${detOrden.producto.id}) }"
+										   class="btn btn-danger">Quitar</a></td>
 								</tr>
 								</tbody>
 							</table>
@@ -60,7 +62,7 @@
 
 							<ul class="list-group">
 								<li class="list-group-item"><h5 th:text="${orden.total}"></h5></li>
-								<a th:href="@{/order}" class="btn btn-dark">Ver Orden</a>
+								<a th:href="@{/resumenOrden}" class="btn btn-dark">Ver Orden</a>
 							</ul>
 						</div>
 

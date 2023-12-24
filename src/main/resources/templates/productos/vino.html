@@ -12,30 +12,30 @@
 
     <h2>Bienvenido a INDEX de VINO</h2>
 
-    <!--
-    <div class="text-end">
-        <a href="/admin/productos/nuevo" class="btn btn-primary mb-3">
-            Agregar producto
-        </a>
-    </div>
-    -->
-
+    <div class="contenedor-items">
     <div class="row">
         <div class="col col-xl-3 col-lg-4 col-md-6 col-sm-12 my-5 d-flex justify-content-around"
              th:each="producto:${vinos}" th:object="${producto}">
-            <div class="card" style="width: 18rem;">
+            <form th:action="@{/cart}" method="POST">
+                <input type="hidden" th:value="${producto.id}" name="id">
+            <div class="card text-center" style="width: 18rem;">
                 <img th:src="@{/assets/{filename}(filename=*{rutaImagen})}" alt="" class="img-thumbnail w-100">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item justify-content-center" th:text="*{nombre}"></li>
                     <li class="list-group-item" th:text="*{stock}"></li>
                     <li class="list-group-item" th:text="*{precio}"></li>
+                    <li class="list-group-item">
+                        <input class="" type="number" id="cantidad" name="cantidad"
+                               autocomplete="off" min="1" th:max="*{stock}" value="0">
+                    </li>
                 </ul>
-                <div class="card-body">
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                <div class="card-body text-center">
+                    <button type="submit" class="boton-item btn-primary">Agregar</button>
                 </div>
             </div>
+            </form>
         </div>
+    </div>
     </div>
 
 </div>

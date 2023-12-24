@@ -58,6 +58,12 @@
                     <a class="nav-link" href="/admin">Administracion</a>
                 </li>
             </ul>
+            <form class="d-flex me-2">
+                <a class="btn btn-outline-success" th:href="@{/usuarios/login}">Iniciar Sesion</a>
+            </form>
+            <form class="d-flex me-2">
+                <a class="btn btn-outline-success" th:href="@{/usuarios/nvoUsuario}">Registrar</a>
+            </form>
             <form class="d-flex">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item me-2">
@@ -100,12 +106,18 @@
         src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js">
 </script>
 
+<script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+</script>
 
 <div layout:fragment="prueba">
 </div>
 
 
 <div layout:fragment="scripts" th:remove="tag">
+</div>
+
+<div layout:fragment="scripts2">
 </div>
 
 
